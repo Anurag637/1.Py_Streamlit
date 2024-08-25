@@ -1,16 +1,9 @@
 import streamlit as st
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
-from win32com.client import Dispatch
-import pythoncom
 import platform
 
-# Only import `win32com.client` if running on Windows
-if platform.system() == "Windows":
-    from win32com.client import Dispatch
-    import pythoncom
-
-# Set page configuration - Must be the first Streamlit command
+# Set page configuration
 st.set_page_config(
     page_title="Email Spam Classifier",
     layout="centered",
@@ -18,11 +11,16 @@ st.set_page_config(
     page_icon="📧"
 )
 
-# Function to make the application speak the text
+# Function to make the application speak the text (Windows only)
 def speak(text):
-    pythoncom.CoInitialize()  # Initialize COM library
-    speak = Dispatch("SAPI.SpVoice")
-    speak.Speak(text)
+    if platform.system() == "Windows":
+        from win32com.client import Dispatch
+        import pythoncom
+        pythoncom.CoInitialize()  # Initialize COM library
+        speak = Dispatch("SAPI.SpVoice")
+        speak.Speak(text)
+    else:
+        st.warning("Speech function is only available on Windows.")
 
 # Load the model and vectorizer
 model = pickle.load(open('spam.pkl', 'rb'))
