@@ -3,6 +3,12 @@ import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from win32com.client import Dispatch
 import pythoncom
+import platform
+
+# Only import `win32com.client` if running on Windows
+if platform.system() == "Windows":
+    from win32com.client import Dispatch
+    import pythoncom
 
 # Set page configuration - Must be the first Streamlit command
 st.set_page_config(
