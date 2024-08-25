@@ -14,11 +14,14 @@ st.set_page_config(
 # Function to make the application speak the text (Windows only)
 def speak(text):
     if platform.system() == "Windows":
-        from win32com.client import Dispatch
-        import pythoncom
-        pythoncom.CoInitialize()  # Initialize COM library
-        speak = Dispatch("SAPI.SpVoice")
-        speak.Speak(text)
+        try:
+            from win32com.client import Dispatch
+            import pythoncom
+            pythoncom.CoInitialize()  # Initialize COM library
+            speak = Dispatch("SAPI.SpVoice")
+            speak.Speak(text)
+        except ImportError:
+            st.warning("Speech function is only available on Windows and requires pywin32.")
     else:
         st.warning("Speech function is only available on Windows.")
 
