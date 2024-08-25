@@ -4,12 +4,10 @@ on:
   # Runs on push to any of the below branches
   push:
     branches: 
-      - master
-      - main
+     - main
   # Runs on pull request events that target one of the below branches
   pull_request:
     branches: 
-      - master
       - main
 
   # Allows you to run this workflow manually from the Actions tab of the repository
@@ -55,7 +53,7 @@ jobs:
       run: |
             echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
             flutter config --no-analytics
-            flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
+            flet build web --base-url ${spamDetector.py} --route-url-strategy https://github.com/Anurag637/Email-Spam-Detector
 
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
