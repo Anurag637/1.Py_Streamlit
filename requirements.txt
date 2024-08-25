@@ -1,4 +1,2 @@
 streamlit==1.28.0           # The specific version of Streamlit you are using
 scikit-learn==1.3.0         # To ensure the CountVectorizer and the model's functionality
-pythoncom==1.2              # Required for the `win32com.client` usage
-pypiwin32==223              # Required for the `win32com.client` usage on Windows
